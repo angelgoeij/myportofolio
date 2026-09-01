@@ -1,4 +1,4 @@
-Name : Angel
+Name : Goeij Angelatika Goeyanto
 
 NPM : 2506656772
 
