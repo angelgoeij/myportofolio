@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Code+Sans+Pro:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,31 +7,57 @@
 }
 
 :root {
-    --ink: #1c1917;
-    --paper: #faf6f0;
-    --accent: #d95d39;
-    --accent-dark: #a8442a;
-    --line: #e3d9c9;
-    --text-muted: #6b6459;
+    --ink: #bfbad6;
+    --paper: #0f1038;
+    --accent: #d3c7e0;
+    --accent-dark: #a4a0c0;
+    --line: #686672;
+    --text-muted: #d4cdc2;
     --radius: 4px;
 }
 
 body {
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Code Sans Pro", monospace;
     color: var(--ink);
     background-color: var(--paper);
     line-height: 1.6;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #4a3b6b,
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            #24245c,
+            transparent 40%
+        ),
+        #0f1038;
 }
 
 h1, .brand {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-family: "Special Gothic Expanded One", sans-serif;
 }
+
+h2 {
+    font-family: "Special Gothic Expanded One";
+    text-align: center;
+    font-size: 2rem;
+}
+
+h3 {
+    font-family: "Special Gothic Expanded One";
+    font-size: 1.5rem;
+}
+
 
 .container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
 }
+
 
 .site-header {
     border-bottom: 1px solid var(--line);
@@ -39,7 +67,7 @@ h1, .brand {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 1.25rem;
 }
 
 .brand {
@@ -61,7 +89,7 @@ h1, .brand {
 }
 
 .hero {
-    padding: 4.5rem 0 5rem;
+    padding: 4rem 0 1rem;
 }
 
 .hero-grid {
@@ -70,7 +98,7 @@ h1, .brand {
     grid-template-areas:
         "identity photo"
         "details  photo";
-    gap: 1.5rem 3rem;
+    gap: 1.5rem 1.5rem;
 }
 
 .hero-identity {
@@ -88,6 +116,7 @@ h1, .brand {
     color: var(--accent-dark);
     font-weight: 700;
     margin-bottom: 0.75rem;
+    font-family: "Code Sans Pro", monospace;
 }
 
 .hero-identity h1 {
@@ -96,9 +125,9 @@ h1, .brand {
 }
 
 .bio {
+    font-family: "Code Sans Pro", monospace;
     color: var(--text-muted);
     max-width: 480px;
-    margin-bottom: 1.5rem;
 }
 
 .meta-list {
@@ -123,6 +152,7 @@ h1, .brand {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+
 }
 
 .social-link {
@@ -149,24 +179,52 @@ h1, .brand {
 
 .photo-block {
     position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
+    
     width: 100%;
     height: 100%;
     background-color: var(--accent);
     border-radius: var(--radius);
     z-index: 0;
+    
 }
 
+.section-border{
+    display: flex;
+    width: 70%;
+    justify-self: center;
+    gap: 2rem;
+    border: 1px solid var(--line);
+}
+
+.experience-box {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    padding: 2.0rem;
+
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.03);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 .avatar {
     position: relative;
     z-index: 1;
     display: block;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 306 / 373;
     object-fit: cover;
-    border-radius: var(--radius);
-    border: 3px solid var(--ink);
+
+    background: rgba(255, 255, 255, 0.03);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    box-shadow: 0 10px 50px rgba(195, 190, 205, 0.35);
 }
 
 .site-footer {
@@ -174,6 +232,83 @@ h1, .brand {
     color: var(--text-muted);
     font-size: 0.85rem;
     border-top: 1px solid var(--line);
+}
+
+
+.experience-border{
+        border: 1.6px solid var(--ink); 
+        border-radius: var(--radius);
+    }
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.experiences {
+    padding: 2rem 0 ;
+}
+
+.experiences h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.experience-box {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    padding: 1.5rem;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.experience-box:hover{
+    box-shadow: 0 10px 50px rgba(195, 190, 205, 0.35);
+}
+
+.experience-box.reverse {
+    flex-direction: row-reverse;
+}
+
+.experience-image {
+    width: 35%;
+    flex-shrink: 0;
+}
+
+.experience-image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.experience-text {
+    flex: 1;
+}
+
+.experience-text h3 {
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+}
+
+.experience-company {
+    font-family: "Code Sans Pro", monospace;
+    color: var(--accent-dark);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.experience-text p {
+    color: var(--text-muted);
 }
 
 @media (max-width: 600px) {
@@ -186,10 +321,23 @@ h1, .brand {
     }
 
     .hero-photo {
-        max-width: 220px;
+        max-width: 300px;
     }
 
     .social-links {
+        font-family: "Code Sans Pro", monospace;
         justify-content: flex-start;
+        margin: 0 auto;
     }
+
+}
+
+
+body {
+    cursor: url("/static/img/hachiwaresleepcursor.png") 4 4, auto;
+}
+
+a,
+button {
+    cursor: url("/static/img/hachiwaresleepcursor.png") 4 4, pointer;
 }
