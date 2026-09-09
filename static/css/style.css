@@ -196,6 +196,7 @@ h3 {
     border: 1px solid var(--line);
 }
 
+/* organizational experience (slide down)  */
 .experience-box {
     display: flex;
     align-items: center;
@@ -212,6 +213,7 @@ h3 {
 
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .avatar {
     position: relative;
     z-index: 1;
@@ -329,10 +331,9 @@ h3 {
         justify-content: flex-start;
         margin: 0 auto;
     }
-
 }
 
-
+/* cursor customization */
 body {
     cursor: url("/static/img/hachiwaresleepcursor.png") 4 4, auto;
 }
@@ -340,4 +341,81 @@ body {
 a,
 button {
     cursor: url("/static/img/hachiwaresleepcursor.png") 4 4, pointer;
+}
+
+/* main page header tab */
+.site-header {
+    padding: 20px 0;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+/* new page - experience section */
+.experience-section {
+    padding: 4rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.section-kicker {
+    color: var(--accent-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.experience-section h1 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: 2rem;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.experience-card {
+    padding: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.experience-category {
+    color: var(--accent-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.experience-card h2 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+.experience-description,
+.empty-state {
+    color: var(--text-muted);
+}
+
+.experience-status {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
