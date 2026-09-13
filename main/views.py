@@ -5,6 +5,7 @@ from main.models import Experience, Project
 
 from main.forms import ContactForm
 
+from django.core.mail import send_mail
 
 def show_main(request):
     form = ContactForm()
@@ -41,8 +42,19 @@ def show_projects(request):
 def show_contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
-
+        
         if form.is_valid():
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            message = form.cleaned_data["message"]
+
+            send_mail(
+                subject=f"Portfolio message from {name}",
+                message=f"Email: {email}\n\n{message}",
+                from_email="your-email@gmail.com",
+                recipient_list=["your-email@gmail.com"],
+            )
+            
             return render(request, "contact.html", {
                 "form": ContactForm(),
                 "success": True,
