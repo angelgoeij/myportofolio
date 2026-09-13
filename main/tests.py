@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from main.models import Experience
-
+from main.models import Project
 
 class MainTest(TestCase):
     def setUp(self):
@@ -59,3 +59,38 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Completed")
         self.assertNotContains(response, "Ongoing")
+
+
+class ProjectPageTest(TestCase):
+
+    # URL is accessible and uses the correct template
+    def test_projects_url_and_template(self):
+        response = self.client.get(reverse("main:show_projects"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "projects.html")
+
+    # model data appears in the returned HTML response when the data is not empty.
+    def test_project_data_appears(self):
+        Project.objects.create(
+            title="Test Project",
+            description="This is a test project.",
+            year=2026,
+            technology="Python"
+        )
+
+        response = self.client.get(reverse("main:show_projects"))
+
+        self.assertContains(response, "Test Project")
+        self.assertContains(response, "This is a test project.")
+        self.assertContains(response, "2026")
+        self.assertContains(response, "Python")
+
+    # an empty message appears in the returned HTML response when the data is empty.
+    def test_empty_project_message_appears(self):
+        response = self.client.get(reverse("main:show_projects"))
+
+        self.assertContains(
+            response,
+            "No projects have been added yet."
+        )
