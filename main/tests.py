@@ -94,3 +94,12 @@ class ProjectPageTest(TestCase):
             response,
             "No projects have been added yet."
         )
+
+    def test_project_model(self):
+        project = Project.objects.create(
+            title="Test Project",
+            description="This is a test project.",
+            year=2026,
+            technology="Python"
+        )
+        self.assertEqual(str(project), "Test Project")
