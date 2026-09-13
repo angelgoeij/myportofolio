@@ -9,7 +9,7 @@
 :root {
     --ink: #bfbad6;
     --paper: #0f1038;
-    --accent: #d3c7e0;
+    --accent: #e9e5ee;
     --accent-dark: #a4a0c0;
     --line: #686672;
     --text-muted: #d4cdc2;
@@ -40,6 +40,10 @@ h1, .brand {
     font-family: "Special Gothic Expanded One", sans-serif;
 }
 
+.brand:hover {
+    background-color: var(--accent);
+}
+
 h2 {
     font-family: "Special Gothic Expanded One";
     text-align: center;
@@ -62,6 +66,7 @@ h3 {
 .site-header {
     border-bottom: 1px solid var(--line);
 }
+
 
 .site-header .container {
     display: flex;
@@ -418,4 +423,64 @@ nav a {
     margin-top: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
+}
+
+/* contact section */
+.contact-section {
+    padding: 2rem 0;
+}
+
+.contact-section .container {
+    background-color: #17184a;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    
+}
+
+.contact-section h2 {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+/* contact form fields */
+.contact-form p {
+    margin-bottom: 1.5rem;
+}
+
+/* contact-box in lines format */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ink);
+    padding: 0.5rem 0;
+    color: var(--ink);
+    font-family: "Code Sans Pro", monospace;
+    outline: none;
+}
+
+.contact-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-bottom-color: var(--accent);
+}
+
+.contact-form button {
+    background-color: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem 1.8rem;
+    font-family: "Code Sans Pro", monospace;
+    font-weight: 700;
+}
+
+.contact-form button:hover {
+    background-color: var(--accent);
 }
