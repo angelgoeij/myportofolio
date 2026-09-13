@@ -16,6 +16,7 @@
             <nav>
                 <a href="{% url 'main:show_main' %}" class="brand" >⟡Profile </a>
                 <a href="{% url 'main:show_experience'%}" class="brand" > ⟡Experience </a>
+                <a href="{% url 'main:show_projects'%}" class="brand" > ⟡Projects </a>
             </nav>
         </div>
         <section class="hero" id="profile">
@@ -44,64 +45,17 @@
         </section>
             <div class="section-border">
             </div>
-        <section class="experiences">
+            <section class="contact-section" id="contact">
             <div class="container">
+                <h2>Contact Me</h2>
+                
+                <form method="POST" class="contact-form">
+                    {% csrf_token %}
 
-                <h2> ⋆𐙚₊˚⊹♡ Organizational Experience</h2>
+                    {{ form.as_p }}
 
-                <!-- Experience 1 -->
-                <div class="experience-box">
-                    <div class="experience-image">
-                        <img src="/static/img/globalvillage.jpg" alt="Experience 1">
-                    </div>
-
-                    <div class="experience-text">
-                        <h3> President of Global Village ⊹ ࣪ ˖ ໒꒱ </h3>
-                        <p class="experience-company">
-                            AIESEC in UI · 2026
-                        </p>
-                        <p>
-                            Led an international cultural festival. Gathered professional speakers, people from various countries, and embassy representations.
-                        </p>
-                    </div>
-                </div>
-
-
-                <!-- Experience 2 -->
-                <div class="experience-box reverse">
-                    <div class="experience-image">
-                        <img src="/static/img/incomingseminar.jpeg" alt="Experience 2">
-                    </div>
-
-                    <div class="experience-text">
-                        <h3> Exchange Participant Manager ˖ ݁♬⋆.˚𝄞</h3>
-                        <p class="experience-company">
-                            AIESEC in UI · 2026
-                        </p>
-                        <p>
-                            Guide and support international exchange participants through their entire journey as incoming Global Volunteers.
-                        </p>
-                    </div>
-                </div>
-
-
-                <!-- Experience 3 -->
-                <div class="experience-box">
-                    <div class="experience-image">
-                        <img src="/static/img/ecosystemstaff.png" alt="Experience 3">
-                    </div>
-
-                    <div class="experience-text">
-                        <h3>Senior Advisor ₊˚⊹ ᰔ </h3>
-                        <p class="experience-company">
-                            ASEAN Youth Organization EcosySTEM · 2025
-                        </p>
-                        <p>
-                            Guide Team Leaders and Team Members craft creative and digestible STEM resources that break complex ideas into bite-sized lessons.
-                        </p>
-                    </div>
-                </div>
-
+                    <button type="submit">Send Message</button>
+                </form>
             </div>
         </section>
     </main>
