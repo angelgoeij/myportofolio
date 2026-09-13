@@ -3,9 +3,6 @@ from django.db import models
 # Create your models here.
 import uuid
 
-from django.db import models
-
-
 class Experience(models.Model):
     EXPERIENCE_CHOICES = [
         ("internship", "Internship"),
@@ -34,3 +31,12 @@ class Experience(models.Model):
     @property
     def is_ongoing(self):
         return self.ended_at is None
+
+class Project(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    year = models.IntegerField()
+    technology = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
