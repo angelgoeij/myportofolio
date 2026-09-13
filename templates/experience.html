@@ -11,45 +11,48 @@
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="nav-container">
+    <main class = "nav-container">
+        <div class="site-header">
             <nav>
-                <a href="{% url 'main:show_main' %}">Profile</a>
-                <a href="{% url 'main:show_experience' %}">Experience</a>
+                <a href="{% url 'main:show_main' %}" class="brand" >⟡Profile </a>
+                <a href="{% url 'main:show_experience'%}" class="brand" > ⟡Experience </a>
+                <a href="{% url 'main:show_projects'%}" class="brand" > ⟡Projects </a>
             </nav>
         </div>
-    </header>
-
-    <main>
-    <section class="experience-section" id="experience">
+    <section class="experiences">
         <div class="container">
-            <p class="section-kicker">My journey so far</p>
-            <h1>Experience</h1>
+            <h2> ⋆𐙚₊˚⊹♡ Organizational Experience</h2>
+            {% for experience in experience_list %}
+                <div class="experience-box">
+                    <div class="experience-image">
+                        <img src="{{ experience.thumbnail }}" alt="{{ experience.title }}">
+                    </div>
 
-            <div class="experience-grid">
-                {% for experience in experience_list %}
-                    <article class="experience-card">
-                        <span class="experience-category">
-                            {{ experience.get_category_display }}
-                        </span>
-                        <h2>{{ experience.title }}</h2>
-                        <p class="experience-description">
+                    <div class="experience-text">
+                        <h3>{{ experience.title }}</h3>
+
+                        <p class="experience-company">
+                            {{ experience.category|title }}
+                        </p>
+
+                        <p>
                             {{ experience.description }}
                         </p>
 
-                        {% if experience.is_ongoing %}
-                            <p class="experience-status">Ongoing</p>
-                        {% else %}
-                            <p class="experience-status">Completed</p>
-                        {% endif %}
-                    </article>
-                {% empty %}
-                    <p class="empty-state">
-                        No experience has been added yet.
-                    </p>
-                {% endfor %}
-            </div>
-        </div>
+                        <p class="experience-status">
+                            {% if experience.is_ongoing %}
+                                Ongoing
+                            {% else %}
+                                Completed
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty-state">
+                    No experience has been added yet.
+                </p>
+            {% endfor %}
     </section>
 </main>
     <footer class="site-footer">
