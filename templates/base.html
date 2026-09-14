@@ -1,0 +1,30 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head> 
+
+<body>
+    <div class = "nav-container">
+        <header class="site-header">
+            <nav>
+                <a href="{% url 'main:show_main' %}" class="brand" >⟡Profile </a>
+                <a href="{% url 'main:show_experience'%}" class="brand" > ⟡Experience </a>
+                <a href="{% url 'main:show_projects'%}" class="brand" > ⟡Projects </a>
+            </nav>
+        </header>
+        {% block content %} {% endblock content %}
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 {{name}}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+        </div>
+    </footer>
+</body>
+
+
