@@ -1,9 +1,9 @@
 # Create your views here.
 from django.shortcuts import render
 
-from main.models import Experience, Project
+from main.models import Education, Experience, Project
 
-from main.forms import ContactForm, ProjectForm
+from main.forms import ContactForm, EducationForm, ProjectForm
 
 from django.core.mail import send_mail
 
@@ -115,3 +115,66 @@ def delete_project(request, project_id):
         return redirect("main:show_projects")
 
     return redirect("main:show_projects")
+
+def show_education(request):
+    json_response = get_education_json(request)
+
+    education = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    education = [education.object for education in education]
+    title_query = request.GET.get("title", "").strip()
+
+    context = {
+        "name": "Goeij Angelatika Goeyanto",
+        "education_list": Education.objects.all(),
+
+    }
+
+    return render(request, "education.html", context)
+
+def create_education(request):
+    form = EducationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Pendidikan baru berhasil ditambahkan!")
+        return redirect("main:show_projects")
+
+    context = {
+        "name": "Goeij Angelatika Goeyanto",
+        "form": form,
+    }
+    return render(request, "education_form.html", context)
+
+
+def get_education_json(request):
+    title_query = request.GET.get("title", "").strip()
+    education = Education.objects.all()
+
+    if title_query:
+        education = education.filter(title__icontains=title_query)
+
+    education_json = serializers.serialize("json", education)
+    return HttpResponse(education_json, content_type="application/json")
+
+def delete_education(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+
+    if request.method == "POST":
+        education.delete()
+        messages.success(request, "Pendidikan berhasil dihapus!")
+        return redirect("main:show_education")
+
+    return redirect("main:show_education")
+
+def get_education_json(request):
+    title_query = request.GET.get("title", "").strip()
+    education = Education.objects.all()
+
+    if title_query:
+        education = education.filter(title__icontains=title_query)
+
+    education_json = serializers.serialize("json", education)
+    return HttpResponse(education_json, content_type="application/json")
