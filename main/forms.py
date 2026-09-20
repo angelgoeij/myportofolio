@@ -1,13 +1,14 @@
 from django import forms
 from django.forms.models import ModelForm
 from django.forms.widgets import TextInput, Textarea, URLInput
-from main.models import Project
+from main.models import Project, Education
 
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
+
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -52,6 +53,55 @@ class ProjectForm(ModelForm):
                 }
             ),
             "project_image_url": URLInput(
+                attrs={
+                    "placeholder": "https://drive.google.com/file/d/1MxgskniDCxWOvJaGYaJd806UD-WoLIWZ&sz=w1000",
+                }
+            ),
+        }
+
+class EducationForm(ModelForm):
+    class Meta:
+        model = Education
+        fields = [
+            "title",
+            "description",
+            "year",
+            "education_url",
+            "education_image_url"
+        ]
+
+        labels = {
+            "title": "Nama Institusi",
+            "description": "Deskripsi Institusi",
+            "year": "Tahun Lulus",
+            "education_url" : "URL Website Institusi",
+            "education_image_url" : "URL Foto Institusi",
+        }
+
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "Portfolio Website",
+                    "maxlength": 255,
+                }
+            ),
+            "description": Textarea(
+                attrs={
+                    "placeholder": "Tell us about your institution!",
+                    "rows": 3,
+                }
+            ),
+            "year": TextInput(
+                attrs={
+                    "placeholder": "2020",
+                }
+            ),
+            "education_url": URLInput(
+                attrs={
+                    "placeholder": "https://cs.ui.ac.id/",
+                }
+            ),
+            "education_image_url": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/file/d/1MxgskniDCxWOvJaGYaJd806UD-WoLIWZ&sz=w1000",
                 }
