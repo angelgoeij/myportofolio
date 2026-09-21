@@ -66,3 +66,18 @@ Since I have moved a section to another page, which made that section empty, I b
 Overall, I use AI mainly as a supporting tool. Most of the Volunteering Project's development follows the materials and instructions provided in Tutorial 2 which then AI helps me when I encouter specific problems or when I am unsure how to approach a particular feature (such as the Contact Me section)
 
 AI Prompting Log: https://chatgpt.com/share/6aa6cfc4-4b74-83ec-8e77-18ddc43a2629
+
+### Assignment 3
+1. ModelForm is used because it makes it easier to make forms on a model without having to manually make every HTML form frield. ModelForm automatically input the form fields based on the fields in the model, and it also handle validation and save hte submitted data to the database. This makes the vode very easy to maintain, make the code shorted, and reduce the possibility of errors compared to making the form manually.
+
+We also need to add {% csrf_token %} to forms that use POST requests because Django uses CSRF protection to prevent Cross-Site Request Forgery attacks. THE CSRF token is a secret unique token created by server in purpose to secure application from malicious and unauthorized request.
+
+2. JSON is preffered in modern web application development because it has a simpler and more compact structure than XML. JSON is also easier for humans to read and write, and it is easily processed by programming alnguages, especially JavaScript. 
+
+It is convenient for transferrign structured data between a server and a client because JSON uses a key value paris and arrays. Which makes it common to be used in frontend and backend.
+
+3. When a view function needs to return portfolio data in JSON format, the process start when the client sends a request tot he Django view. The view take the data from the database throught the Django model. However it cannot be directly returned as JSON because the data received from the database is represented as Django model objects
+
+Which is why we need to do serialization which converts the Django model objects and their data into a format that is compatible. After that, DJango can return the serialized data through a HttpResponse with content_type="application/json". The client can then receive and process the data as JSON.
+
+4. AI Disclosure: I did not use any AI tools in this assignment as I have been referring to Tutorial 3
