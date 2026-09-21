@@ -178,3 +178,21 @@ def get_education_json(request):
 
     education_json = serializers.serialize("json", education)
     return HttpResponse(education_json, content_type="application/json")
+
+def update_education(request, id):
+    education = get_object_or_404(Education, id=id)
+
+    if request.method == "POST":
+        form = EducationForm(request.POST, instance=education)
+
+        if form.is_valid():
+            form.save()
+            return redirect("main:show_education")
+
+    else:
+        form = EducationForm(instance=education)
+
+    return render(request, "update_education.html", {
+        "form":form,
+        "education":education,
+    })
