@@ -41,10 +41,14 @@
                                 <div class="project-actions">
                                     {% if education.education_url %}
                                         <a href="{{ education.education_url }}" class="button">Lihat Education</a>
+                                        <a href="{% url 'main:update_education' education.id %}" class="button"> Edit </a>
                                     {% endif %}
                                     {% include "components/education_delete_modal.html" with education=education %}
                                 </div>
                             </div>
+
+                           
+
                         </article>
                     {% empty %}
                         {% if title_query %}
