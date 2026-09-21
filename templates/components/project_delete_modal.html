@@ -1,6 +1,6 @@
 <p class="experience-status">
     <button type="button"
-            class="social-link"
+            class="button button-danger"
             popovertarget="delete-project-{{ project.id }}"
             aria-label="Hapus {{ project.title }}"
             title="Hapus proyek">
@@ -31,12 +31,12 @@
         </p>
         <div class="project-delete-modal__actions">
             <button type="button"
-                    class="social-link"
+                    class="button button-secondary"
                     popovertarget="delete-project-{{ project.id }}"
                     popovertargetaction="hide">Batal</button>
             <form method="post" action="{% url 'main:delete_project' project.id %}">
                 {% csrf_token %}
-                <button type="submit" class="social-link">Ya, Hapus</button>
+                <button type="submit" class="button button-danger">Ya, Hapus</button>
             </form>
         </div>
     </div>
