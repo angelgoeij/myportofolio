@@ -140,7 +140,7 @@ def create_education(request):
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Pendidikan baru berhasil ditambahkan!")
-        return redirect("main:show_projects")
+        return redirect("main:show_education")
 
     context = {
         "name": "Goeij Angelatika Goeyanto",
