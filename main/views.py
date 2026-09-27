@@ -120,6 +120,9 @@ def get_projects_json(request):
 
 @login_required(login_url="/login/")
 def delete_project(request, project_id):
+    if not request.user.is_superuser:
+                raise PermissionDenied
+        
     project = get_object_or_404(Project, pk=project_id)
 
     if request.method == "POST":
@@ -149,6 +152,9 @@ def show_education(request):
 
 @login_required(login_url="/login/")
 def create_education(request):
+    if not request.user.is_superuser:
+                raise PermissionDenied
+        
     form = EducationForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -175,6 +181,9 @@ def get_education_json(request):
 
 @login_required(login_url="/login/")
 def delete_education(request, education_id):
+    if not request.user.is_superuser:
+                raise PermissionDenied
+    
     education = get_object_or_404(Education, pk=education_id)
 
     if request.method == "POST":
@@ -217,7 +226,7 @@ def register(request):
 
     if request.method == "POST" and form.is_valid():
         form.save()
-        messages.sucess(request,"Account created successfully. Please log in.")
+        messages.success(request,"Account created successfully. Please log in.")
         return redirect("main:login")
 
     context = {
@@ -226,18 +235,6 @@ def register(request):
     }
     return render(request, "register.html", context)
 
-def login_user(request):
-    form = AuthenticationForm(request, data=request.POST or None)
-
-    if request.method == "POST" and form.is_valid():
-        login(request, form.get_user())
-        return redirect("main:show_main")
-
-    context = {
-        "name": "Burhan",
-        "form": form,
-    }
-    return render(request, "login.html", context)
 
 def logout_user(request):
     logout(request)
@@ -256,7 +253,7 @@ def login_user(request):
         return response
 
     context = {
-        "name": "Burhan",
+        "name": "Goeij Angelatika Goeyanto",
         "form": form,
     }
     return render(request, "login.html", context)
@@ -267,7 +264,7 @@ def toggle_star(request, project_id):
 
     if request.method == "POST":
         if request.user in project.starred_by.all():
-            project.starred_by.add(request.user)
+            project.starred_by.remove(request.user)
         else:
             project.starred_by.add(request.user)
-    return redirect("main:show_project")
+    return redirect("main:show_projects")
