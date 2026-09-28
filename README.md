@@ -80,4 +80,27 @@ It is convenient for transferrign structured data between a server and a client 
 
 Which is why we need to do serialization which converts the Django model objects and their data into a format that is compatible. After that, DJango can return the serialized data through a HttpResponse with content_type="application/json". The client can then receive and process the data as JSON.
 
-4. AI Disclosure: I did not use any AI tools in this assignment as I have been referring to Tutorial 3
+4. AI Disclosure: I did not use any AI tools in this assignment as I have been referring to Tutorial 3.
+
+### Assignment 4
+
+-- Sep 24 - Sep 26, 2026
+I worked on Tutorial 4 by implementing the basic authentication features, including registration, login, and logout. I also added the login status and last_login information, and restricted certain Project actions so that only authorized users could access them.
+
+I then added the star feature using ManyToManyField. This allows logged-in users to star or unstar a Project while also keeping track of how many users have starred each Project.
+
+
+-- Sep 26 - Sep 27, 2026
+I continued with Individual Assignment 4 by implementing an Editor role using Django Groups and Permissions. The Editor is allowed to edit existing Project data but doesnt have permission to create or delete Projects.
+
+I also updated the templates so that the available actions depend on the current user's role. For example, the Edit button is available to Editors and the portfolio owner, while Create and Delete are limited to the portfolio owner.
+
+Finally, I tested the authorization system using different types of users, including visitors, regular users, Editors, and the superuser. I checked both the buttons shown on the website and direct access through the URL to make sure unauthorized users receive a 403 Forbidden response.
+
+-- Sep 27 - Sep 28, 2026
+I improved the portfolio's visual presentation by adding a horizontal carousel for the Project section. This makes it possible to browse through multiple Projects by scrolling horizontally instead of displaying everything in a long vertical list.
+
+I also adjusted the layout and styling so that the carousel fits better with the existing design of the portfolio.
+
+AI Disclosure: I did not use any AI tools in this assignment as I have been referring to Tutorial 3. 
+Reflective Question: This week’s reflective question has been removed
