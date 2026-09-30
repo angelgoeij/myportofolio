@@ -1028,6 +1028,54 @@ nav a {
     font-size: 0.8rem;
 }
 
+/** horizontal infinite scroling carousel **/
+.skill-belt {
+    width: 100%;
+    overflow: hidden;
+    background-color:#a4a0c0;
+}
+
+.skill-track {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    animation: scroll 15s linear infinite;
+}
+
+.skill-group {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    padding-right: 3rem;
+    flex-shrink: 0;
+}
+
+.skill {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.skill img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
 /** CSS for the toast from tutorial 5 **/
 /* toast */
 .toast-component {
