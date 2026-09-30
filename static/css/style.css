@@ -48,6 +48,7 @@ h2 {
     font-family: "Special Gothic Expanded One";
     text-align: center;
     font-size: 2rem;
+    color: var(--ink);
 }
 
 h3 {
@@ -501,6 +502,8 @@ nav a {
     display: block;
     margin-bottom: 0.4rem;
     font-weight: 700;
+    color: var(--ink);
+    
 }
 
 .form-group input,
@@ -546,47 +549,6 @@ nav a {
     background: var(--ink);
 }
 
-/** tutorial 3 - project forms add **/
-.project-form {
-    width: 100%;
-    max-width: 100%;
-    margin-top: 1.5rem;
-}
-
-.form-group {
-    margin-bottom: 1.25rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 700;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.7rem;
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-    font: inherit;
-    transition:
-        border-color 0.2s ease,
-        outline-color 0.2s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: 2px solid var(--accent);
-    border-color: var(--accent);
-}
-
-.form-error {
-    color: #b42318;
-    font-size: 0.85rem;
-    margin-top: 0.35rem;
-}
 
 
 /** tutorial 3  **/
@@ -1176,6 +1138,7 @@ nav a {
     margin: 0 2.5rem 1.25rem 0;
     font-family: "Space Grotesk", -apple-system, sans-serif;
     font-size: 1.5rem;
+    
 }
 
 .project-form-modal__close {
