@@ -146,21 +146,13 @@ def delete_project(request, project_id):
     return redirect("main:show_projects")
 
 def show_education(request):
-    json_response = get_education_json(request)
-
-    education = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    education = [education.object for education in education]
-    title_query = request.GET.get("title", "").strip()
+    title_query = request.GET.get("title","").strip()
 
     context = {
         "name": "Goeij Angelatika Goeyanto",
-        "education_list": Education.objects.all(),
-
+        "title_query": title_query,
+        "form":EducationForm(),
     }
-
     return render(request, "education.html", context)
 
 @login_required(login_url="/login/")
@@ -170,10 +162,15 @@ def create_education(request):
         
     form = EducationForm(request.POST or None)
 
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        messages.success(request, "Pendidikan baru berhasil ditambahkan!")
-        return redirect("main:show_education")
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+
+            return JsonResponse(
+                {"success": True, "message": "Pendidikan berhasil ditambahkan!"},status=201)
+
+        return JsonResponse(
+            {"success": False,"errors": form.errors.get_json_data()},status=400)
 
     context = {
         "name": "Goeij Angelatika Goeyanto",
@@ -185,12 +182,24 @@ def create_education(request):
 def get_education_json(request):
     title_query = request.GET.get("title", "").strip()
     education = Education.objects.all()
-
+    
     if title_query:
         education = education.filter(title__icontains=title_query)
 
-    education_json = serializers.serialize("json", education)
-    return HttpResponse(education_json, content_type="application/json")
+    data = []
+    for edu in education:
+        data.append({
+            "pk": str(edu.id),
+            "fields": {
+                "title": edu.title,
+                "description": edu.description,
+                "year": edu.year,
+                "education_url": edu.education_url,
+                "education_image_url": edu.education_image_url,
+                }
+        })
+
+    return JsonResponse(data, safe=False)
 
 @login_required(login_url="/login/")
 def delete_education(request, education_id):
@@ -206,15 +215,6 @@ def delete_education(request, education_id):
 
     return redirect("main:show_education")
 
-def get_education_json(request):
-    title_query = request.GET.get("title", "").strip()
-    education = Education.objects.all()
-
-    if title_query:
-        education = education.filter(title__icontains=title_query)
-
-    education_json = serializers.serialize("json", education)
-    return HttpResponse(education_json, content_type="application/json")
 
 def update_education(request, id):
     education = get_object_or_404(Education, id=id)
@@ -295,6 +295,26 @@ def create_project_ajax(request):
         project = form.save()
         return JsonResponse(
             {"message": "Project added successfully.", "pk": str(project.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
+
+
+
+@require_POST
+def create_education_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add education."},
+            status=403,
+        )
+
+    form = EducationForm(request.POST)
+    if form.is_valid():
+        education = form.save()
+        return JsonResponse(
+            {"message": "Education added successfully.", "pk": str(education.id)},
             status=201,
         )
 

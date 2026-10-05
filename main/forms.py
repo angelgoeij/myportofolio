@@ -119,3 +119,14 @@ class EducationForm(ModelForm):
                 }
             ),
         }
+    def clean_title(self):
+        title = strip_tags(self.cleaned_data["title"]).strip()
+        if not title:
+            raise ValidationError("Education name can't contain only HTML tags.")
+        return title
+
+    def clean_year(self):
+        return strip_tags(self.cleaned_data["year"]).strip()
+
+    def clean_description(self):
+        return strip_tags(self.cleaned_data["description"]).strip()
