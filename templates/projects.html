@@ -192,7 +192,7 @@
 
     // Search form event handler
     function searchProjects() {
-    fetchProjects(searchInput.value.trim());
+        fetchProjects(searchInput.value.trim());
     }
 
     searchInput.addEventListener("input", function() {
@@ -209,7 +209,7 @@
         searchProjects();
     });
 
-        const CREATE_PROJECT_ENDPOINT = "{% url 'main:create_project_ajax' %}";
+    const CREATE_PROJECT_ENDPOINT = "{% url 'main:create_project_ajax' %}";
     const projectForm = document.getElementById('project-form');
 
     // Read a cookie value, used to get the CSRF token
