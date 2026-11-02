@@ -38,6 +38,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     tech_stack = models.CharField(max_length=255)
+    year = models.CharField(max_length=4)
     project_url = models.URLField(blank=True)
     project_image_url = models.URLField(blank=True, max_length=500)
     starred_by = models.ManyToManyField(

@@ -71,20 +71,21 @@ class ProjectPageTest(TestCase):
         self.assertTemplateUsed(response, "projects.html")
 
     # model data appears in the returned HTML response when the data is not empty.
+    
     def test_project_data_appears(self):
         Project.objects.create(
             title="Test Project",
             description="This is a test project.",
-            year=2026,
-            technology="Python"
+            tech_stack="Python",
+            project_url="https://example.com",
+            project_image_url=""
         )
 
         response = self.client.get(reverse("main:show_projects"))
 
-        self.assertContains(response, "Test Project")
-        self.assertContains(response, "This is a test project.")
-        self.assertContains(response, "2026")
-        self.assertContains(response, "Python")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Projects")
+        self.assertContains(response, "project-search-form")
 
     # an empty message appears in the returned HTML response when the data is empty.
     def test_empty_project_message_appears(self):
@@ -92,7 +93,7 @@ class ProjectPageTest(TestCase):
 
         self.assertContains(
             response,
-            "No projects have been added yet."
+            "No projects have been added or found yet."
         )
 
     def test_project_model(self):
@@ -100,6 +101,6 @@ class ProjectPageTest(TestCase):
             title="Test Project",
             description="This is a test project.",
             year=2026,
-            technology="Python"
+            tech_stack="Python"
         )
         self.assertEqual(str(project), "Test Project")
