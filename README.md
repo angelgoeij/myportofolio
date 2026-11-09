@@ -142,3 +142,66 @@ Overall, I used AI mainly as a supporting tool when I encountered a specific pro
 AI Prompting Log:
     1. https://claude.ai/share/b923ff19-8266-47d3-b314-71b5f92479f7 
     2. https://chatgpt.com/share/6ac3ae7e-2368-83ec-b19a-19a1d29d0c85
+
+
+### Assignment 6
+
+-- 6 Nov - 7 Nov, 2026
+    I continued working on the Education section by integrating Django REST Framework (DRF). I created an Education ModelSerializer with specific fields, read-only star information, and input validation using validate_field methods and strip_tags. I also implemented role-based permissions so Editors can update Education records, while the portfolio owner has full access. The star endpoint was restricted to authenticated users and uses request.user to identify who starred an item.
+
+-- 7 Nov - 8 Nov
+    I created the Education API views using @api_view and SessionAuthentication, with list, detail, and star endpoints supporting GET, POST, PUT, PATCH, and DELETE. I also added search through query parameters and registered the endpoints under /api/v1/. Each request returns an appropriate HTTP status code.
+
+    After completing the backend, I connected the API to the Education frontend using Fetch API. Users can now load, search, add, edit, star, and delete Education records without refreshing the page. I also added an Edit modal, toast notifications, CSRF headers, and text escaping to handle errors and improve security.
+
+-- 9 Nov
+    Finally, I wrote API tests using APITestCase to check different user roles, permissions, validation, and starring functionality. I also checked that rejected requests do not change the database. For CSRF testing, I used APIClient(enforce_csrf_checks=True) with .login() to verify that requests without a valid CSRF token are rejected.
+
+1. REST, PUT, and PATCH
+
+REST stands for Representational State Transfer. It is an architectural style for designing APIs, where data is treated as resources that can be accessed or modified using URLs and HTTP methods such as GET, POST, PUT, PATCH, and DELETE. Simply returning JSON does not automatically make an API RESTful. A RESTful API also needs to use URLs to represent resources, appropriate HTTP methods, and suitable status codes.
+
+The main difference between PUT and PATCH is:
+    - PUT replaces the entire resource, so the client generally needs to send all required fields.
+    - PATCH only updates specific fields, so the client only needs to send the fields that have changed.
+
+2. The Role of Serializers in Django REST Framework
+
+Serializers in Django REST Framework convert Django model data into formats like JSON and validate incoming data before it is saved to the database. Compared to manually creating dictionaries with JsonResponse, as we did in Tutorial 05, serializers make the process easier and more organized.
+
+Some of their main advantages are:
+    - Data validation: Checks whether submitted data follows the required rules.
+    - Less repetitive code: Reduces the need to manually create dictionaries and validation logic.
+    - Model integration: ModelSerializer can automatically generate fields from an existing Django model.
+    - Clear error messages: Shows which fields contain invalid data.
+Overall, serializers make API code cleaner and easier to manage.
+
+3. Authentication vs. Authorization
+
+Authentication and authorization have different purposes:
+    - Authentication identifies who the user is, for example, checking whether someone is logged in.
+    - Authorization determines what the user is allowed to do, such as creating, editing, or deleting Education records.
+
+Access permissions should be checked on the server using permission classes, not just by hiding buttons in the template. Hiding buttons only changes what users can see. It does not prevent them from sending API requests directly through tools like Postman or browser Developer Tools.
+
+4. CSRF Protection and force_authenticate
+
+When using SessionAuthentication, requests that modify data, such as POST, PUT, PATCH, and DELETE, require a valid CSRF token. This is because browsers automatically send session cookies with requests. Without CSRF protection, another website could potentially trick a logged-in user's browser into performing unwanted actions.
+
+A CSRF token helps prevent this by requiring requests that modify data to include a valid token. Using force_authenticate alone cannot properly test CSRF protection because it directly sets the authenticated user and skips the normal SessionAuthentication process, including its CSRF checks.
+
+To test CSRF protection properly, we should use APIClient(enforce_csrf_checks=True) and log in through a real session. Then we can check that:
+    - A request without a CSRF token is rejected.
+    - A request with a valid CSRF token is accepted.
+This helps confirm that CSRF protection is actually working.
+
+5. AI Disclosure:  used AI (ChatGPT) as a supporting tool during this assignment, mainly when I faced problems or had trouble finding the cause of errors. Most of the implementation was done independently by following Tutorial 07 and the previous tutorials, which were my main references for developing the Education API and its frontend integration.
+
+I mainly used AI to debug and review parts of my existing code. Since some files contained a lot of code, finding errors manually could be time-consuming. I provided ChatGPT with relevant code, error messages, and descriptions of the problems to help me understand possible causes and solutions.
+
+For example, I used AI to locate a JavaScript syntax error and troubleshoot issues with the Education Edit and Add functions, where the API requests were successful but the cards did not display the expected information.
+
+However, not all AI suggestions worked with my existing code. Sometimes, I needed to provide more context or ask for smaller changes instead of rewriting entire sections. I also checked the results using the browser's Developer Tools, especially the Console and Network tabs, to make sure I understood the problems and that the suggested changes worked as expected.
+
+AI Prompting Log:
+    - https://chatgpt.com/share/6af1d1ea-9b38-83ec-a088-e4ed5504f0e9
