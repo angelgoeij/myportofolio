@@ -148,10 +148,16 @@ def delete_project(request, project_id):
 def show_education(request):
     title_query = request.GET.get("title","").strip()
 
+    is_editor = (
+        request.user.is_authenticated
+        and request.user.groups.filter(name="Editor").exists()
+    )
+
     context = {
         "name": "Goeij Angelatika Goeyanto",
         "title_query": title_query,
         "form":EducationForm(),
+        "is_editor": is_editor,
     }
     return render(request, "education.html", context)
 
@@ -181,13 +187,16 @@ def create_education(request):
 
 def get_education_json(request):
     title_query = request.GET.get("title", "").strip()
-    education = Education.objects.all()
+    education = Education.objects.prefetch_related('starred_by').all()
     
     if title_query:
         education = education.filter(title__icontains=title_query)
 
     data = []
     for edu in education:
+        starred_users = edu.starred_by.all()
+        is_starred = request.user in starred_users if request.user.is_authenticated else False
+        starred_by_names = ", ".join([u.username for u in starred_users])
         data.append({
             "pk": str(edu.id),
             "fields": {
@@ -196,6 +205,9 @@ def get_education_json(request):
                 "year": edu.year,
                 "education_url": edu.education_url,
                 "education_image_url": edu.education_image_url,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
                 }
         })
 
@@ -281,6 +293,19 @@ def toggle_star(request, project_id):
         else:
             project.starred_by.add(request.user)
     return redirect("main:show_projects")
+
+
+@login_required(login_url="/login/")
+def toggle_star(request, education_id):
+    education  = get_object_or_404(Education, pk=education_id)
+
+    if request.method == "POST":
+        if request.user in education.starred_by.all():
+            education.starred_by.remove(request.user)
+        else:
+            education.starred_by.add(request.user)
+    return redirect("main:show_education")
+
 
 @require_POST
 def create_project_ajax(request):
