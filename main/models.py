@@ -55,6 +55,9 @@ class Education(models.Model):
     year = models.CharField(max_length=4)
     education_url = models.URLField(blank=True)
     education_image_url = models.URLField(blank=True, max_length=500)
+    starred_by = models.ManyToManyField(
+        User, related_name = "starred_education", blank = True
+    )
     
     def __str__(self):
         return self.title
