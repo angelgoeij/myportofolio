@@ -1,4 +1,6 @@
 from django.urls import path
+from rest_framework.authtoken import views as authtoken_views
+from main import api_views
 
 from main.views import create_education, create_education_ajax, create_project_ajax, delete_education, delete_project, get_education_json, get_projects_json, login_user, logout_user, register, show_education, show_main, show_experience, show_projects, show_contact, create_project, toggle_star, update_education
 
@@ -26,4 +28,7 @@ urlpatterns = [
     path("project/<uuid:project_id>/star/",toggle_star, name="toggle_star",),
     path("projects/add-ajax/", create_project_ajax, name="create_project_ajax"),
     path("education/add-ajax/", create_education_ajax, name="create_education_ajax"),
+
+    path("api/v1/auth/token/",authtoken_views.obtain_auth_token, name="api_token_auth"),
+    path("api/v1/auth/logout/",api_views.api_logout,name="api_logout",),
 ]
